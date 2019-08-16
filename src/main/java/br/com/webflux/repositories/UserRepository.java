@@ -1,12 +1,11 @@
 package br.com.webflux.repositories;
 
 import br.com.webflux.documents.User;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
+import reactor.core.publisher.Mono;
 
 @Repository
-public interface UserRepository  extends MongoRepository<User, String> {
-    Optional<User> findById(String id);
+public interface UserRepository  extends ReactiveCrudRepository<User, String> {
+    Mono<User> findById(String id);
 }

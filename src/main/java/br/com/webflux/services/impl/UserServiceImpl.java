@@ -5,10 +5,10 @@ import br.com.webflux.repositories.UserRepository;
 import br.com.webflux.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -16,22 +16,22 @@ public class UserServiceImpl implements UserService {
     UserRepository repository;
 
     @Override
-    public User create(User user) {
-        return repository.insert(user);
-    }
-
-    @Override
-    public User update(User user) {
+    public Mono<User> create(User user) {
         return repository.save(user);
     }
 
     @Override
-    public Optional<User> findById(String id) {
+    public Mono<User> update(User user) {
+        return repository.save(user);
+    }
+
+    @Override
+    public Mono<User> findById(String id) {
         return repository.findById(id);
     }
 
     @Override
-    public List<User> findAll() {
+    public Flux<User> findAll() {
         return repository.findAll();
     }
 

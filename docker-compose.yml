@@ -2,6 +2,7 @@ version: '3'
 
 services:
   mongo-express:
+    container_name: mongo-express
     image: mongo-express
     ports:
       - 8081:8081
@@ -19,6 +20,7 @@ services:
       - mongo-compose-network
 
   mongo:
+    container_name: mongo
     image: mongo
 #    environment:
 #      MONGO_INITDB_ROOT_USERNAME: root
@@ -29,6 +31,18 @@ services:
       - ./mongodb:/data/db
     networks:
       - mongo-compose-network
+
+  #  spring:
+  #    image: maven:3.6.1-jdk-11-slim
+  #    container_name: spring
+  #    working_dir: /spring
+  #    volumes:
+  #      - ./:/spring
+  #    ports:
+  #      - 8080:8080
+  #    command: mvn clean test spring-boot:run
+  #    depends_on:
+  #      - mongo
 
 networks:
   mongo-compose-network:

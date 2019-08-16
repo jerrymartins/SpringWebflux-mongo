@@ -1,14 +1,13 @@
 package br.com.webflux.services;
 
 import br.com.webflux.documents.User;
-
-import java.util.List;
-import java.util.Optional;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface UserService {
-    User create(User user);
-    User update(User user);
-    Optional<User> findById(String id);
-    List<User> findAll();
+    Mono<User> create(User user);
+    Mono<User> update(User user);
+    Mono<User> findById(String id);
+    Flux<User> findAll();
     void deleteById(String id);
 }

@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -26,27 +28,27 @@ public class UserController {
 
     @PostMapping
     @ApiOperation("Register User")
-    public ResponseEntity<User> create(@RequestBody @Valid User user) {
+    public ResponseEntity<Mono<User>> create(@RequestBody @Valid User user) {
         return ResponseEntity.status(HttpStatus.OK).body(service.create(user));
     }
 
     @GetMapping()
     @ApiOperation("Find User by id")
-    public ResponseEntity<Optional<User>> findAllById(@RequestParam(value = "id client") String id) {
+    public ResponseEntity<Mono<User>> findAllById(@RequestParam(value = "id client") String id) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(service.findById(id));
     }
 
     @GetMapping("all")
     @ApiOperation("get all Users")
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<Flux<User>> findAll() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(service.findAll());
     }
 
     @PutMapping
     @ApiOperation(value = "Update User")
-    public ResponseEntity<User> update(@ApiParam(value = "Client", required = true) @RequestBody @Valid User user) {
+    public ResponseEntity<Mono<User>> update(@ApiParam(value = "Client", required = true) @RequestBody @Valid User user) {
         return ResponseEntity.status(HttpStatus.OK).body(service.update(user));
     }
 
