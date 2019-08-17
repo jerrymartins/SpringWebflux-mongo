@@ -49,6 +49,13 @@ public class UserController {
                 .body(service.findAll());
     }
 
+    @GetMapping("findByName")
+    @ApiOperation("Find Users by name")
+    public ResponseEntity<Flux<User>> findByName(@RequestParam(value = "nameClient") String name) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(service.findUsersByName(name));
+    }
+
     @PutMapping
     @ApiOperation(value = "Update User")
     public ResponseEntity<Mono<User>> update(@ApiParam(value = "Client", required = true) @RequestBody @Valid User user) {

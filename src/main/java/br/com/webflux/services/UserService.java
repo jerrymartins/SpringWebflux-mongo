@@ -11,5 +11,6 @@ public interface UserService {
     Mono<User> update(User user);
     Mono<User> findById(String id);
     Flux<User> findAll();
+    Flux<User> findUsersByName(String name);
     void deleteById(String id);
 }

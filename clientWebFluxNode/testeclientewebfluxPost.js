@@ -26,29 +26,10 @@ postUsers = async () => {
 
 }
 
-
-for (var i = 0; i < 2000; i++) {
-	getDevices();
-}
-
-for (var i = 0; i < 2000; i++) {
-	getDevices();
-}
-
-for (var i = 0; i < 2000; i++) {
-	getDevices();
-}
-
-for (var i = 0; i < 2000; i++) {
-	getDevices();
-}
-
-for (var i = 0; i < 2000; i++) {
-	getDevices();
-}
-
-for (var i = 0; i < 2000; i++) {
-	getDevices();
-}
-
-//getDevices();
+setInterval(() => postUsers(), 20);
+setInterval(() => postUsers(), 40);
+setInterval(() => postUsers(), 50);
+setInterval(() => postUsers(), 60);
+setInterval(() => postUsers(), 70);
+setInterval(() => postUsers(), 80);
+setInterval(() => postUsers(), 90);

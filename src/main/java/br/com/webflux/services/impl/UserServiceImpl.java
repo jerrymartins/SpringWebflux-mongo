@@ -36,6 +36,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Flux<User> findUsersByName(String name) {
+        return repository.findUsersByName(name);
+    }
+
+    @Override
     public void deleteById(String id) {
         repository.deleteById(id);
     }
