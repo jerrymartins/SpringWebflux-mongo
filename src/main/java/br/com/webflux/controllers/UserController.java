@@ -6,20 +6,15 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Api("User Controller")
 @RestController
@@ -44,16 +39,19 @@ public class UserController {
 
     @GetMapping("all")
     @ApiOperation("get all Users")
-    public ResponseEntity<Flux<User>> findAll() {
+    public ResponseEntity<Flux<User>> findAll(final @RequestParam(name = "page") int page,
+                                              final @RequestParam(name = "size") int size) {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(service.findAll());
+                .body(service.findAll(PageRequest.of(page, size)));
     }
 
     @GetMapping("findByName")
     @ApiOperation("Find Users by name")
-    public ResponseEntity<Flux<User>> findByName(@RequestParam(value = "nameClient") String name) {
+    public ResponseEntity<Flux<User>> findByName(@RequestParam(value = "nameClient") String name,
+                                                 final @RequestParam(name = "page", defaultValue = "0") int page,
+                                                 final @RequestParam(name = "size", defaultValue = "50") int size) {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(service.findUsersByName(name));
+                .body(service.findUsersByName(name, PageRequest.of(page, size)));
     }
 
     @PutMapping
@@ -72,5 +70,4 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
-
 }

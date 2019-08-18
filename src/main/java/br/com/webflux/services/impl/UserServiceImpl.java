@@ -4,6 +4,8 @@ import br.com.webflux.documents.User;
 import br.com.webflux.repositories.UserRepository;
 import br.com.webflux.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -31,13 +33,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Flux<User> findAll() {
+    public Flux<User> findAll(Pageable page) {
         return repository.findAll();
     }
 
     @Override
-    public Flux<User> findUsersByName(String name) {
-        return repository.findUsersByName(name);
+    public Flux<User> findUsersByName(String name, Pageable page) {
+        return repository.findUsersByName(name, page);
     }
 
     @Override
