@@ -60,7 +60,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(service.update(user));
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/")
     @ApiOperation("Delete User By Id")
     public ResponseEntity<Void> delete(@RequestParam(value = "id user") String id) {
         try {
